@@ -7,6 +7,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace MarketData.UI.ViewModel
 {
@@ -26,9 +27,12 @@ namespace MarketData.UI.ViewModel
             }
         }
 
+        private Dispatcher _dispatcher;
+
         [ImportingConstructor]
         public MarketDataViewModel(IPricePublisher pricePublisher, IPriceSource priceSource, IReferenceData referenceData)
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
             _pricePublisher = pricePublisher;
             _priceSource = priceSource;
             _referenceData = referenceData;
@@ -39,6 +43,16 @@ namespace MarketData.UI.ViewModel
 	        }
 
             RefreshPrices();
+            _pricePublisher.PriceUpdated += _pricePublisher_PriceUpdated;
+        }
+
+        void _pricePublisher_PriceUpdated(int securityID, decimal price)
+        {
+            _dispatcher.BeginInvoke((Action)(() =>
+                                    {
+                                        var viewModel = SecurityPrices.FirstOrDefault(x => x.Security.SecurityID == securityID);
+                                        viewModel.Price = price;
+                                    }));
         }
 
         private void RefreshPrices()
