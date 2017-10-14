@@ -3,9 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:converters="clr-namespace:MarketData.UI.Converters"
       mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+        <converters:ConverterChain x:Key="InvertBoolToVisConverter">
+            <BooleanToVisibilityConverter/>
+            <converters:Not/>
+        </converters:ConverterChain>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,9 +36,30 @@
                   Grid.Row="1" Grid.Column="0"/>
         <Button Content="Refresh Prices" 
                 Margin="3" Grid.Row="1" Grid.Column="1" 
-                Visibility="{Binding ElementName=_livePrices, Path=IsChecked, Converter={StaticResource BoolToVisConverter}}" />
-        <DataGrid ItemsSource="{Binding SecurityPrices}" Grid.Row="2" Grid.ColumnSpan="2">
-            
+                Visibility="{Binding ElementName=_livePrices, Path=IsChecked, Converter={StaticResource InvertBoolToVisConverter}}" />
+        <DataGrid ItemsSource="{Binding SecurityPrices}" 
+                  AutoGenerateColumns="False"
+                  Grid.Row="2" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn CanUserSort="True" CanUserReorder="False" Header="Ticker" Width="80" Binding="{Binding Security.Ticker}" IsReadOnly="True"/>
+                <DataGridTextColumn CanUserSort="True" CanUserReorder="False" Header="Full Name" Width="400" Binding="{Binding Security.Name}" IsReadOnly="True"/>
+                <DataGridTemplateColumn CanUserSort="True" CanUserReorder="False" Header="Price" Width="80" SortMemberPath="Price" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Price, StringFormat=N4}"
+                                     TextAlignment="Right" 
+                                     HorizontalAlignment="Right" 
+                                     VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </UserControl>

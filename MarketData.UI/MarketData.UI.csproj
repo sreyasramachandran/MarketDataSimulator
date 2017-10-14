@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\NotificationBase.cs" />
+    <Compile Include="Converters\ConverterChain.cs" />
+    <Compile Include="Converters\Not.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\MarketDataViewModel.cs" />
     <Compile Include="ViewModel\SecurityDataViewModel.cs" />
