@@ -22,8 +22,18 @@
                    Margin="8,3"
                    Foreground="LightSteelBlue" 
                    Visibility="{Binding ElementName=_searchBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVisConverter}}" />
-        <TextBox Margin="3" Grid.ColumnSpan="2" Name="_searchBox" Grid.Row="0" Grid.Column="0" Background="Transparent" />
-        <CheckBox Name="_livePrices" Margin="3" VerticalAlignment="Center" Content="Live Prices" Grid.Row="1" Grid.Column="0"/>
-        <Button Content="Refresh Prices" Margin="3" Grid.Row="1" Grid.Column="1" Visibility="{Binding ElementName=_livePrices, Path=IsChecked, Converter={StaticResource BoolToVisConverter}}" />
+        <TextBox Margin="3" Grid.ColumnSpan="2" 
+                 Name="_searchBox" Grid.Row="0" Grid.Column="0" 
+                 Background="Transparent" />
+        <CheckBox Name="_livePrices" Margin="3" 
+                  VerticalAlignment="Center" 
+                  Content="Live Prices" 
+                  Grid.Row="1" Grid.Column="0"/>
+        <Button Content="Refresh Prices" 
+                Margin="3" Grid.Row="1" Grid.Column="1" 
+                Visibility="{Binding ElementName=_livePrices, Path=IsChecked, Converter={StaticResource BoolToVisConverter}}" />
+        <DataGrid ItemsSource="{Binding SecurityPrices}" Grid.Row="2" Grid.ColumnSpan="2">
+            
+        </DataGrid>
     </Grid>
 </UserControl>

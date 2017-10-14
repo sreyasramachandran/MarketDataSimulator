@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersistedPriceData.cs" />
     <Compile Include="PriceSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceDataSimulator.cs" />
@@ -51,6 +52,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PriceSimulator_SeedValues.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ReferenceDataDB.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
