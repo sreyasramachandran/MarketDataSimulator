@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<ArrayOfSecurity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Security>
+    <SecurityID>1</SecurityID>
+    <Name>Commonwealth Bank</Name>
+    <Ticker>CBA AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>2</SecurityID>
+    <Name>Westpac Banking Corp</Name>
+    <Ticker>WBC AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>3</SecurityID>
+    <Name>ANZ Banking Group Ltd</Name>
+    <Ticker>ANZ AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>4</SecurityID>
+    <Name>National Aust. Bank</Name>
+    <Ticker>NAB AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>5</SecurityID>
+    <Name>BHP Billiton Ltd</Name>
+    <Ticker>BHP AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>6</SecurityID>
+    <Name>CSL LtdStrong Buy</Name>
+    <Ticker>CSL AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>7</SecurityID>
+    <Name>Wesfarmers Ltd</Name>
+    <Ticker>WES AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>8</SecurityID>
+    <Name>Telstra Corporation</Name>
+    <Ticker>TLS AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>9</SecurityID>
+    <Name>Woolworths Ltd</Name>
+    <Ticker>WOW AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>10</SecurityID>
+    <Name>Macquarie Group Ltd</Name>
+    <Ticker>MQG AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>11</SecurityID>
+    <Name>RIO Tinto LtdStrong Buy</Name>
+    <Ticker>RIO AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>12</SecurityID>
+    <Name>Transurban Group Ordinary Shares/Units FP Triple Stap</Name>
+    <Ticker>TCL AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>13</SecurityID>
+    <Name>Woodside Petroleum</Name>
+    <Ticker>WPL AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>14</SecurityID>
+    <Name>Scentre Group Stapled Securities</Name>
+    <Ticker>SCG AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>15</SecurityID>
+    <Name>Amcor Ltd</Name>
+    <Ticker>AMC AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>16</SecurityID>
+    <Name>Suncorp Group Ltd</Name>
+    <Ticker>SUN AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>17</SecurityID>
+    <Name>SOUTH32 Ltd</Name>
+    <Ticker>S32 AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>18</SecurityID>
+    <Name>Newcrest Mining</Name>
+    <Ticker>NCM AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>19</SecurityID>
+    <Name>SYD Airport FP Stapled Securities US Prohibited</Name>
+    <Ticker>SYD AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>20</SecurityID>
+    <Name>Westfield Corp Stapled Securities</Name>
+    <Ticker>WFD AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>21</SecurityID>
+    <Name>AGL Energy Ltd</Name>
+    <Ticker>AGL AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>22</SecurityID>
+    <Name>Insurance Australia</Name>
+    <Ticker>IAG AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>23</SecurityID>
+    <Name>Fortescue Metals Group</Name>
+    <Ticker>FMG AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>24</SecurityID>
+    <Name>Goodman Group Stapled Securities FP</Name>
+    <Ticker>GMG AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>25</SecurityID>
+    <Name>AMP Ltd</Name>
+    <Ticker>AMP AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>26</SecurityID>
+    <Name>Brambles Ltd</Name>
+    <Ticker>BXB AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>27</SecurityID>
+    <Name>Aristocrat LeisureStrong Buy</Name>
+    <Ticker>ALL AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>28</SecurityID>
+    <Name>QBE Insurance Group</Name>
+    <Ticker>QBE AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>29</SecurityID>
+    <Name>Ramsay Health Care</Name>
+    <Ticker>RHC AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>30</SecurityID>
+    <Name>Origin Energy</Name>
+    <Ticker>ORG AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>31</SecurityID>
+    <Name>Qantas Airways</Name>
+    <Ticker>QAN AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>32</SecurityID>
+    <Name>Oil Search Ltd 10 Toea</Name>
+    <Ticker>OSH AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>33</SecurityID>
+    <Name>Lendlease Group Unit/ Stapled Securities</Name>
+    <Ticker>LLC AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>34</SecurityID>
+    <Name>Stockland Units/ Stapled Securities</Name>
+    <Ticker>SGP AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>35</SecurityID>
+    <Name>Treasury Wine Estate</Name>
+    <Ticker>TWE AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>36</SecurityID>
+    <Name>ASX Ltd</Name>
+    <Ticker>ASX AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>37</SecurityID>
+    <Name>Vicinity Centres Ordinary/Units FP Stapled Securities</Name>
+    <Ticker>VCX AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>38</SecurityID>
+    <Name>Aurizon Holdings Ltd</Name>
+    <Ticker>AZJ AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>39</SecurityID>
+    <Name>Dexus Units FP Stapled</Name>
+    <Ticker>DXS AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>40</SecurityID>
+    <Name>APA Group Units FP Stapled Securities</Name>
+    <Ticker>APA AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>41</SecurityID>
+    <Name>Sonic Healthcare</Name>
+    <Ticker>SHL AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>42</SecurityID>
+    <Name>GPT Group Stapled Securities FP</Name>
+    <Ticker>GPT AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>43</SecurityID>
+    <Name>Santos Ltd</Name>
+    <Ticker>STO AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>44</SecurityID>
+    <Name>Mirvac Group Stapled Securities</Name>
+    <Ticker>MGR AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>45</SecurityID>
+    <Name>Caltex Australia</Name>
+    <Ticker>CTX AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>46</SecurityID>
+    <Name>Medibank Private Ltd</Name>
+    <Ticker>MPL AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>47</SecurityID>
+    <Name>Computershare Ltd</Name>
+    <Ticker>CPU AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>48</SecurityID>
+    <Name>James Hardie Indust Chess Depositary Interests 1:1</Name>
+    <Ticker>JHX AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>49</SecurityID>
+    <Name>Orica Ltd</Name>
+    <Ticker>ORI AU</Ticker>
+  </Security>
+  <Security>
+    <SecurityID>50</SecurityID>
+    <Name>Incitec Pivot</Name>
+    <Ticker>IPL AU</Ticker>
+  </Security>
+</ArrayOfSecurity>

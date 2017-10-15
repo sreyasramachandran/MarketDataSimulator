@@ -7,8 +7,8 @@
     <ProjectGuid>{C9BCB9A5-2966-474A-93C8-EEC9EEB34B64}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MarketData.Simulator</RootNamespace>
-    <AssemblyName>MarketData.Simulator</AssemblyName>
+    <RootNamespace>MarketData.Services</RootNamespace>
+    <AssemblyName>MarketData.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
