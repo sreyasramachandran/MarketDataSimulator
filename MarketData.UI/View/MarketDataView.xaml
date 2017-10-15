@@ -3,14 +3,21 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"       
       xmlns:converters="clr-namespace:MarketData.UI.Converters"
       mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
         <converters:ConverterChain x:Key="InvertBoolToVisConverter">
-            <BooleanToVisibilityConverter/>
             <converters:Not/>
+            <BooleanToVisibilityConverter/>
         </converters:ConverterChain>
+        <converters:GreaterThan x:Key="GreaterThan"/>
+        <CollectionViewSource x:Key="secPrices"
+                              Source="{Binding SecurityPrices}"
+                              Filter="CollectionViewSource_Filter"
+                              IsLiveFilteringRequested="True">
+        </CollectionViewSource>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -22,34 +29,116 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Filter Securities" 
+        <TextBlock Text="Filter Securities By Name" 
                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                    Margin="8,3"
                    Foreground="LightSteelBlue" 
                    Visibility="{Binding ElementName=_searchBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVisConverter}}" />
-        <TextBox Margin="3" Grid.ColumnSpan="2" 
-                 Name="_searchBox" Grid.Row="0" Grid.Column="0" 
-                 Background="Transparent" />
+        <TextBox Name="_searchBox" 
+                 Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 TextChanged="_searchBox_TextChanged"
+                 Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                 Background="Transparent" Margin="3" />
         <CheckBox Name="_livePrices" Margin="3" 
                   VerticalAlignment="Center" 
                   Content="Live Prices" 
+                  IsChecked="{Binding LivePrices}"
+                  Command="{Binding LivePricesCmd}"
                   Grid.Row="1" Grid.Column="0"/>
         <Button Content="Refresh Prices" 
                 Margin="3" Grid.Row="1" Grid.Column="1" 
-                Visibility="{Binding ElementName=_livePrices, Path=IsChecked, Converter={StaticResource InvertBoolToVisConverter}}" />
-        <DataGrid ItemsSource="{Binding SecurityPrices}" 
-                  AutoGenerateColumns="False"
-                  Grid.Row="2" Grid.ColumnSpan="2">
+                Command="{Binding RefreshPricesCmd}"
+                Visibility="{Binding LivePrices, Converter={StaticResource InvertBoolToVisConverter}}" />
+        <DataGrid AutoGenerateColumns="False"
+                  ItemsSource="{Binding Source={StaticResource secPrices}}"
+                  Grid.Row="2" Grid.ColumnSpan="2" >
             <DataGrid.Columns>
-                <DataGridTextColumn CanUserSort="True" CanUserReorder="False" Header="Ticker" Width="80" Binding="{Binding Security.Ticker}" IsReadOnly="True"/>
-                <DataGridTextColumn CanUserSort="True" CanUserReorder="False" Header="Full Name" Width="400" Binding="{Binding Security.Name}" IsReadOnly="True"/>
-                <DataGridTemplateColumn CanUserSort="True" CanUserReorder="False" Header="Price" Width="80" SortMemberPath="Price" IsReadOnly="True">
+                <DataGridTextColumn 
+                    CanUserSort="True" 
+                    CanUserReorder="False" 
+                    Header="Ticker" Width="80" 
+                    Binding="{Binding Security.Ticker}" 
+                    IsReadOnly="True"/>
+                <DataGridTextColumn 
+                    CanUserSort="True" 
+                    CanUserReorder="False" 
+                    Header="Full Name" 
+                    Width="400" 
+                    Binding="{Binding Security.Name}" 
+                    IsReadOnly="True"/>
+                <DataGridTemplateColumn 
+                    CanUserSort="True" 
+                    CanUserReorder="False" 
+                    Header="Price" Width="80" 
+                    SortMemberPath="Price" 
+                    IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Price, StringFormat=N4}"
+                            <TextBlock 
+                                     Name="_priceText"
+                                     Text="{Binding Price, StringFormat=N4}"
                                      TextAlignment="Right" 
-                                     HorizontalAlignment="Right" 
-                                     VerticalAlignment="Center"></TextBlock>
+                                     HorizontalAlignment="Stretch" 
+                                     VerticalAlignment="Stretch">
+                                <!--
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Value="True">
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource GreaterThan}">
+                                                        <Binding Path="Price"/>
+                                                        <Binding Path="PrevPrice"/>
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.EnterActions>
+                                                    <StopStoryboard BeginStoryboardName="priceDownStoryboard"/>
+                                                    <BeginStoryboard Name="priceUpStoryboard">
+                                                        <Storyboard >
+                                                            <ColorAnimation 
+                                                                IsCumulative="True"
+                                                                Duration="0:0:0.7" 
+                                                                From="Green" 
+                                                                To="Transparent"
+                                                                Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Color)">
+                                                            </ColorAnimation>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <RemoveStoryboard BeginStoryboardName="priceUpStoryboard"/>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                            <DataTrigger Value="False">
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource GreaterThan}">
+                                                        <Binding Path="Price"/>
+                                                        <Binding Path="PrevPrice"/>
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.EnterActions>
+                                                    <StopStoryboard BeginStoryboardName="priceUpStoryboard"/>
+                                                    <BeginStoryboard Name="priceDownStoryboard">
+                                                        <Storyboard >
+                                                            <ColorAnimation 
+                                                                IsCumulative="True"
+                                                                Duration="0:0:0.7" 
+                                                                From="Red" 
+                                                                To="Transparent"
+                                                                Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Color)">
+                                                            </ColorAnimation>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <RemoveStoryboard BeginStoryboardName="priceDownStoryboard"/>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style> -->
+                            </TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.HeaderStyle>

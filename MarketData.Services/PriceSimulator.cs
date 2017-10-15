@@ -14,7 +14,7 @@ namespace MarketData.Services
 {
     [Export(typeof(IPriceSource))]
     [Export(typeof(IPricePublisher))]
-    public class PriceSimulator: IPriceSource, IPricePublisher
+    public sealed class PriceSimulator: IPriceSource, IPricePublisher, IDisposable
     {
         private Dictionary<int, decimal> _prices = new Dictionary<int, decimal>();
         
@@ -39,11 +39,24 @@ namespace MarketData.Services
             _tick.Start();
         }
 
+        public decimal GetPrice(int securityID)
+        {
+            if (!_prices.Keys.Contains(securityID))
+            {
+                throw new Exception("Unknown security / Price not available");
+            }
+
+            return _prices[securityID];
+        }
+
+        public event PriceUpdated PriceUpdated;
+
         void _tick_Elapsed(object sender, ElapsedEventArgs e)
         {
+            _tick.Stop();
             foreach (var securityID in _prices.Keys.ToList())
             {
-                decimal change = (decimal)1 + _stockMovement.Next(-300, 300) * (decimal).0001;
+                decimal change = (decimal)1 + _stockMovement.Next(-30, 30) * (decimal).0001;
                 _prices[securityID] = _prices[securityID] * change;
 
                 if (null != PriceUpdated)
@@ -51,18 +64,13 @@ namespace MarketData.Services
                     PriceUpdated.Invoke(securityID, _prices[securityID]);
                 }
             }
+            _tick.Start();
         }
 
-        public decimal GetPrice(int securityID)
+        public void Dispose()
         {
-            if (!_prices.Keys.Contains(securityID))
-            {
-                throw new Exception("Unknown security");
-            }
-
-            return _prices[securityID];
+            _tick.Stop();
+            _tick.Dispose();
         }
-
-        public event PriceUpdated PriceUpdated;
     }
 }

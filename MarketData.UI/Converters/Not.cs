@@ -11,7 +11,7 @@ namespace MarketData.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (targetType == typeof(bool))
+            if (value.GetType() == typeof(bool))
             {
                 return !(bool)value;                
             }

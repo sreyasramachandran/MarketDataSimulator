@@ -23,11 +23,24 @@ namespace MarketData.UI.View
     [Export("RootView", typeof(UserControl))]
     public partial class MarketDataView : UserControl
     {
+        MarketDataViewModel _viewModel;
+
         [ImportingConstructor]
         public MarketDataView(MarketDataViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = viewModel;
+            _viewModel = viewModel;
+            this.DataContext = _viewModel;
+        }
+
+        private void CollectionViewSource_Filter(object sender, FilterEventArgs e)
+        {
+            e.Accepted = _viewModel.Filter(e.Item);
+        }
+
+        private void _searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Dispatcher.BeginInvoke((Action)(() => (this.Resources["secPrices"] as CollectionViewSource).View.Refresh()));
         }
     }
 }

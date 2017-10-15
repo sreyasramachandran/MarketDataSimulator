@@ -24,8 +24,22 @@ namespace MarketData.UI.ViewModel
             }
         }
 
-        private decimal _price;
-        public decimal Price
+        private decimal? _prevPrice;
+        public decimal? PrevPrice
+        {
+            get
+            {
+                return _prevPrice;
+            }
+            set
+            {
+                _prevPrice = value;
+                base.NotifyPropertyChanged();
+            }
+        }
+
+        private decimal? _price;
+        public decimal? Price
         {
             get 
             {
@@ -33,6 +47,15 @@ namespace MarketData.UI.ViewModel
             }
             set 
             {
+                if (value == _price)
+                {
+                    return;
+                }
+
+                if (_price.HasValue)
+                {
+                    PrevPrice = _price;
+                }
                 _price = value;
                 base.NotifyPropertyChanged();
             }
